@@ -1,0 +1,68 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// FontAwesome
+@import url("https://use.fontawesome.com/releases/v5.15.3/css/all.css");
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// For logo up top
+.logo{
+    height:$navbar-height;
+}
+// For blockly graph
+#funcText {
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
+#funcText>img {
+    height: 3px;
+    width: 15px;
+    vertical-align: middle;
+    margin-right: .5em;
+}
+#y1 {
+    background-color: #36c;
+}
+
+// For Blockly resize
+.blockly_table {
+    height: 100%;
+    width: 100%;
+}
+#blocklyArea {
+    height: 99%;
+}
+.full-screen{
+    /*Figure out how to expand and do some math with the size of the navbar*/
+    height:50vh;
+    overflow: auto;
+}
+
+// Tabs for teacher dashboard
+//.nav-item .tab-colour{
+//    background-color: $teal;
+//    color: white;
+//    & .nav-link{
+//        color: white;
+//    }
+//}
+//.card-body .nav-item .tab-colour .active{
+//    background-color: $green;
+//}
+#fillDiv{
+    height:100vh;
+    width: 100vw;
+}
+.box {
+    position:absolute;
+    top:$navbar-height*2;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    z-index: 1;
+}
