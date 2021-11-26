@@ -10023,6 +10023,11 @@ h3 {
   background-color: #36c;
 }
 
+#blockly_body {
+  height: 100%;
+  overflow: hidden;
+}
+
 .blockly_table {
   height: 100%;
   width: 100%;
