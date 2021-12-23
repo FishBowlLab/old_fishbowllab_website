@@ -10003,8 +10003,17 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.logo {
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.nav-logo {
   height: 30px;
+}
+
+.logo {
+  height: 100px;
 }
 
 #funcText {
@@ -10023,36 +10032,31 @@ h3 {
   background-color: #36c;
 }
 
-#blockly_body {
+#blockly-body {
   height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-.blockly_table {
+.blockly-table {
   height: 100%;
   width: 100%;
 }
 
-#blocklyArea {
-  height: 99%;
-}
-
-.full-screen {
-  /*Figure out how to expand and do some math with the size of the navbar*/
-  height: 50vh;
-  overflow: auto;
-}
-
-#fillDiv {
-  height: 100vh;
-  width: 100vw;
-}
-
-.box {
+#blocklyDiv {
   position: absolute;
-  top: 60px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  z-index: 1;
 }
+
+#blocklyArea {
+  height: 90%;
+}
+
+#blockly-footer {
+  height: 10%;
+}
+
+/*
+.full-screen{
+    height:50vh;
+    overflow: auto;
+}*/

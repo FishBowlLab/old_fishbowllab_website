@@ -10,9 +10,17 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+html, body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 // For logo up top
-.logo{
+.nav-logo{
     height:$navbar-height;
+}
+.logo{
+    height: 100px;
 }
 // For blockly graph
 #funcText {
@@ -30,23 +38,30 @@
 }
 
 // For Blockly resize
-#blockly_body{
+#blockly-body{
     height:100%;
+    width:100%;
     overflow: hidden;
 }
 
-.blockly_table {
+.blockly-table {
     height: 100%;
     width: 100%;
 }
-#blocklyArea {
-    height: 99%;
+#blocklyDiv{
+    position:absolute;
 }
+#blocklyArea {
+    height: 90%;
+}
+#blockly-footer{
+    height:10%;
+}
+/*
 .full-screen{
-    /*Figure out how to expand and do some math with the size of the navbar*/
     height:50vh;
     overflow: auto;
-}
+}*/
 
 // Tabs for teacher dashboard
 //.nav-item .tab-colour{
@@ -59,15 +74,3 @@
 //.card-body .nav-item .tab-colour .active{
 //    background-color: $green;
 //}
-#fillDiv{
-    height:100vh;
-    width: 100vw;
-}
-.box {
-    position:absolute;
-    top:$navbar-height*2;
-    right:0px;
-    bottom:0px;
-    left:0px;
-    z-index: 1;
-}

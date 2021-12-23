@@ -13,6 +13,8 @@ var demoWorkspace = Blockly.inject(blocklyDiv, {
         trashcan: true,
 });
 
+// RESIZE CODE
+/*
 var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
@@ -35,6 +37,7 @@ var onresize = function(e) {
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(demoWorkspace);
+*/
 
 function showCode() {
   // Generate JavaScript code and display it.
@@ -42,6 +45,8 @@ function showCode() {
   var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
   alert(code);
 }
+
+// RUNNING JAVASCRIPT CODE
 
 function runCode() {
     // Generate JavaScript code and run it.

@@ -19,26 +19,56 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
-<body id="blockly_body">
-    <div id="app">
-       <div id="fillDiv" class="container-flush">
-            @include("inc.navbar")
-            @include("inc.messages")
-            <div class="d-none d-md-block">
-                @if (Auth::user()->role == "teacher")
-                    <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
-                @else
-                    <a href="/student" class="btn btn-default">Go Back</a>
-                @endif
-            </div>
-            @yield("content")
-        </div>  
+<body>
+    <div id="app" class="container-flush">
+        <!--
+            Display instructions at beginning using popup or modal
+            then hide instructions into question mark info icon
+        -->
+        @include("inc.navbar")
+        @include("inc.messages")
+        <div class="d-none d-md-block">
+            @if (Auth::user()->role == "teacher")
+                <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
+            @else
+                <a href="/student" class="btn btn-default">Go Back</a>
+            @endif
+        </div>
+        @yield("content")
+ 
     </div>
     
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-    <script src="{{ asset('js/blocklyBase.js') }}" defer></script>
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        var blocklyArea = document.getElementById('blocklyArea');
+        var blocklyDiv = document.getElementById('blocklyDiv');
+        var demoWorkspace = Blockly.inject(blocklyDiv,
+            {media: 'https://unpkg.com/blockly/media/',
+             toolbox: document.getElementById('toolbox')});
+        var onresize = function(e) {
+          // Compute the absolute coordinates and dimensions of blocklyArea.
+          var element = blocklyArea;
+          var x = 0;
+          var y = 0;
+          do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+          } while (element);
+          // Position blocklyDiv over blocklyArea.
+          blocklyDiv.style.left = x + 'px';
+          blocklyDiv.style.top = y + 'px';
+          blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+          blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+          Blockly.svgResize(demoWorkspace);
+        };
+        window.addEventListener('resize', onresize, false);
+        onresize();
+        Blockly.svgResize(demoWorkspace);
+    </script>
 </body>
 
 </html>

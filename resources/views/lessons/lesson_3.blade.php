@@ -20,7 +20,7 @@
         <button class="btn btn-primary" onclick="runCode()">Run JavaScript</button>
     </div>
 </div>  
-<div class="row full-screen">
+<div class="row">
     <!--Blockly Panel-->
     <div class="col-md-9 order-2 order-md-1">
         <table class="blockly_table">

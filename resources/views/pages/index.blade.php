@@ -2,11 +2,14 @@
 
 @section("content")
     <div class="jumbotron text-center">
-        <h1>{{$title}}</h1>
+        <h1><img class="logo" src="/storage/images/logo.png" alt="fishbowl-lab-logo"> {{$title}} </h1>
+        
         <p>Modern tools for the future ready solutions</p>
-        <p>
-            <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-        </p>
+        @guest
+            <p>
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+            </p>
+        @endguest
     </div>
     <div class="row">
         <div class="col-12 col-md-8">
