@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lesson;
+use App\Models\LessonCompleted;
 use App\Models\Student;
 use App\Models\Module;
 
@@ -21,22 +21,22 @@ class StudentController extends Controller
 
         // At this moment, we students can only be active in one class at any moment
         $display=[
-            "lessons.updated_at", 
+            "lessons_completed.updated_at", 
             "teachers.lesson_available",
             "teachers.available_at",
-            "lessons.completed_lesson_number",
+            "lessons_completed.completed_lesson_number",
             "modules.title"
         ];
         // Create a lesson subtable to join
-        $lesson_subtable = Lesson::select("lessons.updated_at", "lessons.completed_lesson_number")
+        $lesson_subtable = LessonCompleted::select("lessons_completed.updated_at", "lessons_completed.completed_lesson_number")
                                 ->where("student_id", $user_id);
   
         // outer join teachers to students with class_id
         // left join lessons to new table with lessons
         $lesson_data = Student::where("students.student_id", $user_id)
                                 ->join("teachers", "teachers.class_id", "=", "students.class_id", "left outer")
-                                ->leftJoinSub($lesson_subtable, "lessons", function($join){
-                                    $join->on("lessons.completed_lesson_number", "=", "teachers.lesson_available");
+                                ->leftJoinSub($lesson_subtable, "lessons_completed", function($join){
+                                    $join->on("lessons_completed.completed_lesson_number", "=", "teachers.lesson_available");
                                 })
                                 ->join("modules", "modules.id", "=", "teachers.lesson_available")
                                 //->join("lessons", "teachers.lesson_available", "=", "lessons.completed_lesson_number", "left outer")

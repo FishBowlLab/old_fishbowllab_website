@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Lesson;
+use App\Models\LessonCompleted;
 
 class DashboardController extends Controller
 {
@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $lessons = Lesson::where("student_id", $user_id)->get();
+        $lessons = LessonCompleted::where("student_id", $user_id)->get();
         $data = [
             "name" => ucwords($user->name),
             "lessons" => $lessons,
@@ -25,6 +25,9 @@ class DashboardController extends Controller
         ];
         if ($user->role == "teacher"){
             return view("teacherpages.index")->with($data);
+        }
+        if($user->role == "admin"){
+            return view("adminpages.index")->with($data);
         }
         
         // Return default dashboard

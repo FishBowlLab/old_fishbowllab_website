@@ -100,10 +100,10 @@ class TeacherController extends Controller{
         }
             
         $student_table = Student::join("users", "users.id", "=" ,"students.student_id")
-                                ->join("lessons", "lessons.student_id", "=", "students.student_id")
+                                ->join("lessons_completed", "lessons_completed.student_id", "=", "students.student_id")
                                 ->where("class_id", $id)    // Removes users outside of the classlist
                                 ->orderByDesc("students.student_id")
-                                ->get(["users.name","students.class_id", "lessons.completed_lesson_number"]);
+                                ->get(["users.name","students.class_id", "lessons_completed.completed_lesson_number"]);
         $data = [
             // Filters class
             "student_list" => $student_table,
