@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvailableLesson;
 use Illuminate\Http\Request;
 use App\Models\Module;
 use App\Models\Teacher;
@@ -17,11 +18,10 @@ class TeacherController extends Controller{
         $teacher_id = auth()->user()->id;
         $teacher_name = auth()->user()->name;
         // Contains all unique classIDs for this specific teacher
-        $class_ids = Teacher::select("class_id", "lesson_available")
+        $class_ids = Teacher::select("class_id")
                                 ->where("teacher_id", $teacher_id)
                                 ->orderby("class_id", "asc")
-                                ->get()
-                                ->unique("class_id");     
+                                ->get(); 
         $data = [
             "name" => ucwords($teacher_name),
             "class_ids" => $class_ids,
@@ -54,8 +54,7 @@ class TeacherController extends Controller{
         $selected_modules = $request->input("modules");
         $selected_class = $request->input("class_id");
 
-        $currently_selected = Teacher::select("class_id", "lesson_available")
-                                ->where("teacher_id", $teacher_id)
+        $currently_selected = AvailableLesson::select("class_id", "lesson_number_available")
                                 ->where("class_id", $selected_class)->get();
         
         // Redirect back to the page with error message if nothing is selected
@@ -65,14 +64,13 @@ class TeacherController extends Controller{
         $lessons = [];      // Stores any lessons that need to be updated
 
             foreach($selected_modules as $module){
-                if ($currently_selected->where("lesson_available", "=", $module)->first() == null){
+                if ($currently_selected->where("lesson_number_available", "=", $module)->first() == null){
                     // module doesn't exist and needs to be appended
                     array_push($lessons, [
-                        "teacher_id" => $teacher_id,
-                        "class_id" => $selected_class,
-                        "lesson_available" => $module,
                         "created_at" =>  date('Y-m-d H:i:s'),
-                        "updated_at" => date('Y-m-d H:i:s'),
+                        "class_id" => $selected_class,
+                        "lesson_number_available" => $module,
+                        "availability" => false,    // default state is unavailable
                     ]);
                 }
             }   
@@ -81,7 +79,7 @@ class TeacherController extends Controller{
         if (count($lessons) == 0){
             return redirect(route("teacher.create", ["id" => $selected_class]))->with("error", "You have already selected these lessons"); 
         }
-        Teacher::insert($lessons);
+        AvailableLesson::insert($lessons);
         return redirect(auth()->user()->role)->with("success", "You have successfully updated your lessons");
     }
 
@@ -120,15 +118,14 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit($id){        
-        $module_data = Teacher::join("modules", "teachers.lesson_available", "=" ,"modules.id")
+        $module_data = AvailableLesson::join("modules", "available_lessons.lesson_number_available", "=" ,"modules.id")
                                 ->where("class_id", $id)    // Removes users outside of the classlist
-                                ->orderBy("lesson_available", "asc") // Not working at the moment
-                                ->get(["modules.id", "modules.title","modules.expectation", "teachers.lesson_available", "teachers.available_at"]);
+                                ->orderBy("lesson_number_available", "asc") // Not working at the moment
+                                ->get(["modules.id", "modules.title","modules.expectation", "available_lessons.lesson_number_available", "available_lessons.availability"]);
 
         $default_conditions = [
             "teacher_id" => auth()->user()->id,
             "class_id" => $id,
-            "lesson_available" => 0,
         ];  
         // Look for default value of teacher's classlist
         $default = Teacher::where($default_conditions)->first();
@@ -159,20 +156,21 @@ class TeacherController extends Controller{
      */
     public function update(Request $request, $id){
         $conditions = [
-            "teacher_id" => auth()->user()->id,
             "class_id" => $request->input("class_id"),
-            "lesson_available" => $id,
+            "lesson_number_available" => $id,
         ];
-        $status = Teacher::where($conditions)->firstOrFail();
+        
+        // Checks for the availability of within the table
+        $status = AvailableLesson::where($conditions)->firstOrFail();
         $status->updated_at = time();
 
-        if ($status->available_at == 0){
-            $status->available_at = 1;
+        if ($status->availability == 0){
+            $status->availability = 1;
             $status->save();
             return redirect(route("teacher.edit", $conditions["class_id"]))->with("success", "Lesson ".$id. " was made unavaiable");
         }
         else{
-            $status->available_at = 0;
+            $status->availability = 0;
             $status->save();
             return redirect(route("teacher.edit", $conditions["class_id"]))->with("success", "Lesson ".$id." was made avaiable");
         }
@@ -188,19 +186,17 @@ class TeacherController extends Controller{
         // Add authentication layer here?
 
         $conditions = [
-            "teacher_id" => auth()->user()->id,
             "class_id" => $request->input("class_id"),
-            "lesson_available" => $lesson_id,
+            "lesson_number_available" => $lesson_id,
         ];
         // Look up record 
-        $record = Teacher::where($conditions)->firstOrFail();
+        $record = AvailableLesson::where($conditions)->firstOrFail();
         $record->delete();
 
         // Redirect to same page if lessons still exist
-        $all_records = Teacher::where("teacher_id", $conditions["teacher_id"])
-                            ->where("class_id", $conditions["class_id"])->count();
+        $all_records = AvailableLesson::where("class_id", $conditions["class_id"])->count();
         // count must be greater than 1 because we have 0 as a default in the table
-        if ($all_records > 1){
+        if ($all_records > 0){
             return redirect(route("teacher.edit", $conditions["class_id"]))->with("success", "Lesson ".$lesson_id." successfully deleted");
         }
         // Default returns to dashboard
