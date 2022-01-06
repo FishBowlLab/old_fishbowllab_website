@@ -19,12 +19,12 @@
                     <tbody>
 
                         @foreach ($module_data as $module)
-                            {!!Form::open(["action" => ["TeacherController@update", $module->lesson_available], "method" => "POST"])!!}
+                            {!!Form::open(["action" => ["TeacherController@update", $module->lesson_number_available], "method" => "POST"])!!}
                                 <tr>
                                     <td>{{$module->expectation}}</td>
                                     <td class="text-left">{{$module->title}}</td>
                                     
-                                    @if ($module->available_at ==0)
+                                    @if ($module->availability ==0)
                                         <td>Not Available</td>
                                         <td class="text-center">
                                             {{Form::submit("On", ["class" => "btn btn-success"])}}
@@ -39,7 +39,7 @@
                                     {{Form::hidden("_method", "PUT")}}
                                 {!!Form::close()!!}
 
-                                {!!Form::open(["action" => ["TeacherController@destroy", $module->lesson_available], "method" => "POST"])!!}
+                                {!!Form::open(["action" => ["TeacherController@destroy", $module->lesson_number_available], "method" => "POST"])!!}
                                     {{Form::hidden("class_id", $class_id)}}
                                     {{Form::hidden("_method", "DELETE")}}
                                     <td>

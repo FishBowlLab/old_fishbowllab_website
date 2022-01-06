@@ -25,7 +25,7 @@ Route::get('/products', 'PagesController@products');
 Route::get("/submit", "PagesController@index"); // This blocks get requests for the submit form action
 Route::post('/submit', 'PagesController@store');
 
-#Auth::routes(['register'=>false]);
+Auth::routes(['register'=>false]);
 Auth::routes();
 
 
