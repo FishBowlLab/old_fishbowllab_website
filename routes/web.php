@@ -4,6 +4,7 @@
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,7 +27,7 @@ Route::get("/submit", "PagesController@index"); // This blocks get requests for 
 Route::post('/submit', 'PagesController@store');
 
 Auth::routes(['register'=>false]);
-Auth::routes();
+Auth::routes(["verify"=>true]);
 
 
 Route::group(["middleware" =>"auth"], function(){
@@ -53,7 +54,9 @@ Route::group(["middleware" =>"auth"], function(){
 });
 
 // Route for Mailing
+/*
 Route::get('/email', function(){
     Mail::to('thefishbowllab@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 });
+*/

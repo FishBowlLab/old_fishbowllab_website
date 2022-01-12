@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EmailCollector;
+use App\Models\MailingList;
 
 class PagesController extends Controller
 {
@@ -30,17 +30,16 @@ class PagesController extends Controller
         ]);
         $email = $request->input("email");
         
-        if(EmailCollector::where("email", $email)->count() >0 ){
+        if(MailingList::where("email", $email)->count() >0 ){
             return redirect('/')->with("error", "You have already signed up");
         }
 
         // Default Case
-        EmailCollector::create([
+        MailingList::create([
             "firstname" => $request->input("firstname"),
             "lastname" => $request->input("lastname"),
             "email" => $email,
         ]);
-        return redirect("/")->with("success", "You have successfully signed up");
-        
+        return redirect("/")->with("success", "You have successfully signed up");   
     }
 }

@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Providers;
-
-use App\Models\MailingList;
-use App\Observers\MailingListObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        MailingList::observe(MailingListObserver::class);
+        //
     }
 }
