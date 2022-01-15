@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvailableLesson;
 use Illuminate\Http\Request;
 use App\Models\LessonCompleted;
 use App\Models\Student;
@@ -88,8 +89,17 @@ class StudentController extends Controller
      */
     public function show($id)
     {
+        $availability = Student::where("students.id", auth()->user()->id)
+                                ->join("available_lessons", "available_lessons.class_id", "=", "students.class_id")
+                                ->where("lesson_number_available", $id)
+                                ->value("availability");
+        // Blocks student from accessing lesson if not available
+        if ($availability == 0){
+            return redirect("/student")->with("error", "This lesson is currently unavailable");
+        }
+        
         // Checks for valid module ID between 0 and the max number of modules
-        if ( 0 < $id && $id <= Module::count() ){
+        if ( 0 < $id && $id <= Module::count()){
             return view("lessons.lesson_" . $id);
         }
         return abort(404);

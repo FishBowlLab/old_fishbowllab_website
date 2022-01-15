@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
 use App\Models\MailingList;
+use Illuminate\Support\Facades\Mail;
 
 class PagesController extends Controller
 {
@@ -35,11 +37,18 @@ class PagesController extends Controller
         }
 
         // Default Case
-        MailingList::create([
-            "firstname" => $request->input("firstname"),
-            "lastname" => $request->input("lastname"),
-            "email" => $email,
+        $mailingList = MailingList::create([
+                    "firstname" => ucwords($request->input("firstname")),
+                    "lastname" => ucwords($request->input("lastname")),
+                    "email" => $email,
         ]);
+
+        // Email signup and validation
+        Mail::to($email)->send(new WelcomeMail($mailingList->firstname));
+        if(Mail::failures()){
+            return redirect("/")->with("error", "Sorry! Please try again later");
+        }
+
         return redirect("/")->with("success", "You have successfully signed up");   
     }
 }

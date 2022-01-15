@@ -2,7 +2,7 @@
 
 @section("content")
     <div class="jumbotron text-center">
-        <h1><img class="logo" src="/storage/images/logo.png" alt="fishbowl-lab-logo"> {{$title}} </h1>
+        <h1><img class="logo" src="{{asset('/storage/images/logo.png')}}" alt="fishbowl-lab-logo"> {{$title}} </h1>
         
         <p>Modern tools for the future ready solutions</p>
         @guest

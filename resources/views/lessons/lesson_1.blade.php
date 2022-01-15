@@ -2,6 +2,13 @@
 
 @section("content")  
 
+<!--Laravel doesn't seem to be recognizing this JQuery script-->
+<script>
+    $(document).ready(function(){
+        $("#modalCenter").modal('show');
+    });
+</script>
+
 <div class="container-flush">
     <div class="row px-1">
         <div class="col-12 col-md-8">
@@ -21,11 +28,33 @@
         
         <div class="col-12 col-md-4">
             {!! Form::open(['action' => "StudentController@store", 'method'=>'POST', 'class'=>"float-right px-1"]) !!}
-                <button type="button" class="btn btn-success">Instructions</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCenter">Instructions</button>
                 {{Form::submit("Submit", ["class" => "btn btn-primary"])}}
             {!! Form::close()!!}
         </div>
     </div>
+
+  <!-- Modal -->
+    <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...Place the instructions for the modal here...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="blocklyArea" class="row" style="height:450px"></div>   
     <div id="blocklyDiv" style="position: absolute"></div>
 
