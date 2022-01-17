@@ -2,6 +2,7 @@
 
 #use App\Http\Controllers\AdminController;
 use App\Mail\WelcomeMail;
+use App\Notifications\WelcomeUserEmailNotification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
@@ -53,10 +54,6 @@ Route::group(["middleware" =>"auth"], function(){
     });
 });
 
-// Route for Mailing
-/*
 Route::get('/email', function(){
-    Mail::to('thefishbowllab@gmail.com')->send(new WelcomeMail());
-    return new WelcomeMail();
+    return new WelcomeUserEmailNotification("wilfred");
 });
-*/

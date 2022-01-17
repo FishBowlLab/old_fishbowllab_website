@@ -28,8 +28,15 @@ class RegisterController extends Controller
      * Where to redirect users after registration.
      *
      * @var string
+     *
+     * @return string  path to be redirected to
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo(){
+        if(auth()->user()->role != null){
+            return "/".auth()->user()->role;
+        }
+        return RouteServiceProvider::HOME;
+    }
 
     /**
      * Create a new controller instance.
@@ -72,6 +79,8 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 "role" => $role,
             ]);
+            // Once this new user is created, UserObserver will see this and send a notification welcoming the user.
+            // This might be redundant if we just send an email to verify the email though
         }
         else{
             redirect("/")->with("error", "An error has occured when signing up");
