@@ -1,6 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-elem">
 
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="
+                                    @guest
+                                        {{ url('/') }}
+                                    @endguest 
+                                    @auth
+                                        {{ url('/'.Auth::user()->role)}}   
+                                    @endauth
+                                    ">
             <img class="nav-logo" src={{asset("/storage/images/small-logo.png")}} alt={{ config('app.name', 'Laravel') }}>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
