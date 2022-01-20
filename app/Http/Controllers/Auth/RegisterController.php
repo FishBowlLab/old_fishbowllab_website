@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -79,8 +80,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 "role" => $role,
             ]);
-            // Once this new user is created, UserObserver will see this and send a notification welcoming the user.
-            // This might be redundant if we just send an email to verify the email though
+            // Registered Event is fired and welcome email is sent using NewUserListener
         }
         else{
             redirect("/")->with("error", "An error has occured when signing up");
