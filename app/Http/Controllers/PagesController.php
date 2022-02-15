@@ -26,9 +26,7 @@ class PagesController extends Controller
     {
         // This method needs to be protected
         $this->validate($request, [
-            "firstname" => "required",
-            "lastname" => "required",
-            "email" => "required",
+            "email" => "required|unique:mailing_list,email",
         ]);
         $email = $request->input("email");
         
@@ -38,13 +36,11 @@ class PagesController extends Controller
 
         // Default Case
         $mailingList = MailingList::create([
-                    "firstname" => ucwords($request->input("firstname")),
-                    "lastname" => ucwords($request->input("lastname")),
                     "email" => $email,
         ]);
 
         // Email signup and validation
-        Mail::to($email)->send(new WelcomeMail($mailingList->firstname));
+        Mail::to($email)->send(new WelcomeMail());
         if(Mail::failures()){
             return redirect("/")->with("error", "Sorry! Please try again later");
         }

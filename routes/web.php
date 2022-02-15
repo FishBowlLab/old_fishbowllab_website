@@ -53,7 +53,3 @@ Route::group(["middleware" =>"auth"], function(){
         Route::resource("admin", AdminController::class);
     });
 });
-
-Route::get('/email', function(){
-    return new WelcomeUserEmailNotification("wilfred");
-});

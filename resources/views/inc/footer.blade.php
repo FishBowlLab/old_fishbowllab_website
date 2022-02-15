@@ -1,13 +1,15 @@
 <footer class="footer">
     <div class="container">
-        <div class="row">             
-            <div class="col-4 offset-1 col-sm-2">
-                <h5>Resources</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
+        <div class="row">
+            @guest
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div> 
+            @endguest             
             <div class="col-7 col-sm-5">
                 <h5>Support</h5>
                   <i class="fa fa-envelope fa-lg" aria-hidden="true"></i> <a href="mailto:info@fishbowllab.com">info@fishbowllab.com</a>

@@ -20,8 +20,6 @@ class MailingList extends Model
      * @var array
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
         'email',
     ];
 }
