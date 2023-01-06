@@ -12,8 +12,9 @@
                             <h5 class="mt-0">Wilfred H.</h5>
                             <p>Founder</p>
                             <p class="mb-0">
-                                Responsible for the end to end creation of each experiment at FishBowl Lab, including product development and implementation. 
-                                Wilfred is passionate about education, sports, and challenging existing paradigms.
+                                Wilfred is responsible for the end to end creation of each product at FishBowlLab, including product scoping, development and implementation. 
+                                His experience in education and science enables to build assets on FishBowlLab to address gaps in the intersection between research, policy, and implementation in education.
+                                Wilfred has a proven track record in challenging existing paradigms and is not afraid of exploring alternate avenues.
                             </p>
                         </div>
                     </div>

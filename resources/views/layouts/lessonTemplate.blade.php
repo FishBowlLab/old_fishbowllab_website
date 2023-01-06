@@ -18,6 +18,9 @@
     
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+    <!--Load app's scripts-->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <div id="app" class="container-flush">
@@ -39,9 +42,8 @@
     </div>
     
     <!-- Scripts -->
-    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <!--script src="https://unpkg.com/blockly/blockly.min.js"></!--script>-->
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
         var blocklyArea = document.getElementById('blocklyArea');
         var blocklyDiv = document.getElementById('blocklyDiv');

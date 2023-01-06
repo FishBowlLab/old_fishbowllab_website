@@ -13,67 +13,33 @@
 // Bootstrap Select (For Live Search)
 @import '../../node_modules/bootstrap-select/sass/bootstrap-select.scss';
 
+// Mixin transitions
+@import "mixins";
+
+// Masthead Carosel css
+@import "masthead";
+
+// Blockly css
+@import "blockly";
+
+// Navbar
+@import "navbar";
+
+@import "features";
+
+@import "emailform";
+
 html, body{
     width:100%;
     overflow-x:hidden;
 }
 
-// For logo up top
-.nav-logo{
-    height:$navbar-height;
-}
-.logo{
-    height: 100px;
-}
-// For blockly graph
-#funcText {
-    margin-top: 1em;
-    margin-left: 1.5em;
-}
-#funcText>img {
-    height: 3px;
-    width: 15px;
-    vertical-align: middle;
-    margin-right: .5em;
-}
-#y1 {
-    background-color: #36c;
-}
-
-// For Blockly resize
-#blockly-body{
-    height:100%;
-    width:100%;
-    overflow: hidden;
-}
-
-.blockly-table {
-    height: 100%;
+.card-img-top {
     width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
-#blocklyDiv{
-    position:absolute;
+.card-img-top img{
+    max-width: 100%;
+    max-height: 100%;
 }
-#blocklyArea {
-    height: 90%;
-}
-#blockly-footer{
-    height:10%;
-}
-/*
-.full-screen{
-    height:50vh;
-    overflow: auto;
-}*/
-
-// Tabs for teacher dashboard
-//.nav-item .tab-colour{
-//    background-color: $teal;
-//    color: white;
-//    & .nav-link{
-//        color: white;
-//    }
-//}
-//.card-body .nav-item .tab-colour .active{
-//    background-color: $green;
-//}

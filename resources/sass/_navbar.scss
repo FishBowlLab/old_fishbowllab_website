@@ -1,0 +1,95 @@
+// Styling for the navbar
+#mainNav {
+    border-color: fade-out($gray-darker, .95);
+    background-color: $body-bg;
+    @include transition-all;
+    @include heading-font;
+    .navbar-brand {
+        color: $theme-primary;
+        @include heading-font;
+        font-size: 2rem;
+        &:hover,
+        &:focus {
+            color: darken($theme-primary, 10%);
+        }
+    }
+    /*Attempting to fix the navbar for views other than the homepage*/
+    .navbar-fixed{
+        position: relative;
+        .nav-item{
+            color: $gray-dark;
+            background-color: $theme-bg;
+        }
+    }
+    .nav-logo{
+        height: $navbar-height;
+    }
+    .logo{
+        height: 100px;
+    }
+    .navbar-toggler {
+        font-size: 12px;
+        padding: 8px 10px;
+        color: $gray-darker;
+    }
+    .navbar-nav {
+        > li {
+            > a {
+                font-size: 0.75rem;
+                @include alt-font;
+                &.active {
+                    color: $theme-primary !important;
+                    background-color: transparent;
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+            }
+            > a,
+            > a:focus {
+                color: $gray-darker;
+                &:hover {
+                    color: $theme-primary;
+                }
+            }
+        }
+    }
+    @media (min-width: 992px) {
+        border-color: transparent;
+        background-color: transparent;
+        height: 80px;
+        
+        .navbar-brand {
+            color: fade($body-bg, 70%);
+            &:hover,
+            &:focus {
+                color: $body-bg;
+            }
+        }
+        .navbar-nav > li > a,
+        .navbar-nav > li > a:focus {
+            color: fade-out($body-bg, .3);
+            &:hover {
+                color: $body-bg;
+            }
+        }
+        &.navbar-shrink {
+            border-color: fade-out($gray-darker, .9);
+            background-color: $body-bg;
+            .navbar-brand {
+                color: $gray-darker;
+                &:hover,
+                &:focus {
+                    color: $theme-primary;
+                }
+            }
+            .navbar-nav > li > a,
+            .navbar-nav > li > a:focus {
+                color: $gray-darker;
+                &:hover {
+                    color: $theme-primary;
+                }
+            }
+        }
+    }
+}

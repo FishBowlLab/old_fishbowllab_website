@@ -2,13 +2,6 @@
 
 @section("content")  
 
-<!--Laravel doesn't seem to be recognizing this JQuery script-->
-<script>
-    $(document).ready(function(){
-        $("#modalCenter").modal('show');
-    });
-</script>
-
 <div class="container-flush">
     <div class="row px-1">
         <div class="col-12 col-md-8">
@@ -28,14 +21,14 @@
         
         <div class="col-12 col-md-4">
             {!! Form::open(['action' => "StudentController@store", 'method'=>'POST', 'class'=>"float-right px-1"]) !!}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCenter">Instructions</button>
+                <button id="instructions" type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCenter">Instructions</button>
                 {{Form::submit("Submit", ["class" => "btn btn-primary"])}}
             {!! Form::close()!!}
         </div>
     </div>
 
   <!-- Modal -->
-    <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal fade show" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -70,6 +63,9 @@
         <block type="text_print"></block>
     </xml>
 </div>
- 
-
+<script>
+    window.onload = function() {
+        document.getElementById("instructions").click();
+    }
+</script>
 @endsection

@@ -1,8 +1,6 @@
 <?php
 
 #use App\Http\Controllers\AdminController;
-use App\Mail\WelcomeMail;
-use App\Notifications\WelcomeUserEmailNotification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +19,12 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', 'PagesController@index');
+
+/*
+// Remove these routes for single page application
 Route::get('/about', 'PagesController@about');
 Route::get('/products', 'PagesController@products');
+*/
 
 Route::get("/submit", "PagesController@index"); // This blocks get requests for the submit form action
 Route::post('/submit', 'PagesController@store');

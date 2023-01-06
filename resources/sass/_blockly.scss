@@ -1,0 +1,35 @@
+// For blockly graph
+#funcText {
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
+#funcText>img {
+    height: 3px;
+    width: 15px;
+    vertical-align: middle;
+    margin-right: .5em;
+}
+#y1 {
+    background-color: #36c;
+}
+
+// For Blockly resize
+#blockly-body{
+    height:100%;
+    width:100%;
+    overflow: hidden;
+}
+
+.blockly-table {
+    height: 100%;
+    width: 100%;
+}
+#blocklyDiv{
+    position:absolute;
+}
+#blocklyArea {
+    height: 90%;
+}
+#blockly-footer{
+    height:10%;
+}

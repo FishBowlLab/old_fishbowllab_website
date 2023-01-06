@@ -18,4 +18,22 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$navbar-height: 30px;
+$navbar-height: 35px;
+
+// For Masthead
+$theme-bg:         #F8F8F8;
+$theme-primary:    #fdcc52;
+$theme-secondary:  #c2e59c;
+$theme-tertiary:   #599fd9;
+
+/*
+$theme-secondary:  #7b4397;
+$theme-tertiary:   #dc2430;
+*/
+
+$gray-base:        #000;
+$gray-darker:      lighten($gray-base, 13.5%); // #222
+$gray-dark:        lighten($gray-base, 20%);   // #333
+$gray:             lighten($gray-base, 33.5%); // #555
+$gray-light:       lighten($gray-base, 46.7%); // #777
+$gray-lighter:     lighten($gray-base, 93.5%); // #eee

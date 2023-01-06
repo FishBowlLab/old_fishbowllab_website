@@ -28,6 +28,8 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome');
+        return $this->markdown('emails.welcome')->subject("Welcome to FishBowl Lab")
+        ->with(["logo" => asset('/storage/images/email-logo.png'),
+        ]);
     }
 }

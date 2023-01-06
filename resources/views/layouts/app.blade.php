@@ -22,15 +22,12 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
-<body>
+<body id="page-top">
     <div id="app">
-       @include("inc.navbar")
-       <div class="container">
-            @include("inc.messages")
-            @yield("content")
-        </div>  
+        @include("inc.navbar")
+        @include("inc.messages")
+        @yield("content")
     </div>
-    <p></p>
 </body>
 @include("inc.footer")
 </html>
