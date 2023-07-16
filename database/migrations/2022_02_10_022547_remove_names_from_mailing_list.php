@@ -13,7 +13,7 @@ class RemoveNamesFromMailingList extends Migration
      */
     public function up()
     {
-        Schema::table('mailing_list', function (Blueprint $table) {
+        Schema::table('email_collector', function (Blueprint $table) {
             $table->dropColumn("firstname");
             $table->dropColumn("lastname");
         });
@@ -26,7 +26,7 @@ class RemoveNamesFromMailingList extends Migration
      */
     public function down()
     {
-        Schema::table('mailing_list', function (Blueprint $table) {
+        Schema::table('email_collector', function (Blueprint $table) {
             $table->integer("firstname");
             $table->string("lastname");
         });

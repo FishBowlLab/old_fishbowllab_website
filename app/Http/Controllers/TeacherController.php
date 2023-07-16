@@ -34,6 +34,7 @@ class TeacherController extends Controller{
         $data = [
             "name" => ucwords($teacher_name),
             "class_ids" => $class_ids,
+            "class_amt" => count($class_ids),
         ];
         return view("teacherpages.index")->with($data);
     }

@@ -15,6 +15,9 @@ mix.js('resources/js/app.js' ,'public/js')
     .js("resources/js/blocklyBase", "public/js")
     .js("resources/js/blocklyGraph", "public/js")
     .sass('resources/sass/app.scss', 'public/css')
+    .copy('node_modules/blockly/blockly_compressed.js', 'public/js/blockly_compressed.js')
+    .copy('node_modules/blockly/blocks_compressed.js', 'public/js/blocks_compressed.js')
+    .copy('node_modules/blockly/msg/en.js', 'public/js/msg/en.js')
     .sourceMaps();
 
 

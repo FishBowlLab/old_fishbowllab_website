@@ -12,6 +12,8 @@ class Student extends Model
     protected $table = "students";
     // primary key
     public $primaryKey = "id";
+
+    protected $fillable = ['student_id'];
     
     public function teacher(){
         return $this->belongsTo("App\Models\Teacher");

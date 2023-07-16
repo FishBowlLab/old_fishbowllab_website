@@ -2,5 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/blocklyBase.js": "/js/blocklyBase.js",
     "/js/blocklyGraph.js": "/js/blocklyGraph.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/blockly_compressed.js": "/js/blockly_compressed.js",
+    "/js/blocks_compressed.js": "/js/blocks_compressed.js",
+    "/js/msg/en.js": "/js/msg/en.js"
 }

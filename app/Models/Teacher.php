@@ -12,7 +12,8 @@ class Teacher extends Model
     protected $table = "teachers";
     // primary key
     public $primaryKey = "id";
-    
+    protected $fillable = ['teacher_id'];
+
     public function lesson(){
         return $this->hasMany("App\Models\Lesson");
     }

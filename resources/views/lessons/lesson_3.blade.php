@@ -1,41 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.lessonTemplate')
 
 @section("content")  
-@if (Auth::user()->role == "teacher")
-    <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
-@else
-    <a href="/student" class="btn btn-default">Go Back</a>
-@endif
 
 <h1>Generating Javascript</h1>
 
 <div class="row">
-    <div class="col-12 d-none d-md-block">    
+    <div class="col-8 d-none d-md-block">    
         <p>
             This is a simple demo of generating code from blocks and running the code in a sandboxed JavaScript interpreter.
         </p>
     </div>
-    <div class="col-12">
-        <button class="btn btn-primary" onclick="showCode()">Show JavaScript</button>
-        <button class="btn btn-primary" onclick="runCode()">Run JavaScript</button>
+    <div class="col-4">
+        <button class="btn btn-primary float-right mx-2" onclick="showCode()">Show JavaScript</button>
+        <button class="btn btn-primary float-right mx-2" onclick="runCode()">Run JavaScript</button>
     </div>
 </div>  
 <div class="row">
     <!--Blockly Panel-->
-    <div class="col-md-9 order-2 order-md-1">
-        <table class="blockly_table">
-            <tr>
-                <td id="blocklyArea"></td>
-            </tr>
-        </table>
-        <div id="blocklyDiv" style="position: absolute"></div>
-    </div>
-    <!--Blockly Panel-->
-    <!--Event Panel-->
-    <div class="col-md-3 order-1 order-md-2">
-        <h1>Events</h1>
-    </div>
-    <!--Event Panel-->
+    <div id="blocklyDiv"></div>
 </div>
 
 
@@ -81,8 +63,7 @@
     </block>
 </xml>
 
-  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-  <script src="{{ asset('js/blocklyBase.js') }}" defer></script>
+<script src="{{asset('js/blocklyBase.js')}}"></script>
   <!--script>
     Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
                                demoWorkspace);    

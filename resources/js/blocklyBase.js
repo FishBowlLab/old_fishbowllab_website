@@ -1,43 +1,53 @@
-var blocklyArea = document.getElementById('blocklyArea');
-var blocklyDiv = document.getElementById('blocklyDiv');
-var demoWorkspace = Blockly.inject(blocklyDiv, {
-        media: 'https://unpkg.com/blockly/media/',
-        toolbox: document.getElementById('toolbox'),
-        zoom: {controls: true,
-            wheel: true,
-            startScale: 1.0,
-            maxScale: 3,
-            minScale: 0.3,
-            scaleSpeed: 1.2
-        },
-        trashcan: true,
-});
+const toolbox = {
+    "kind": "flyoutToolbox",
+    "contents": [
+      {
+        "kind": "block",
+        "type": "controls_if"
+      },
+      {
+        "kind" : "block",
+        "type" : "logic_compare"
+      },
+      {
+        "kind": "block",
+        "type": "controls_repeat_ext"
+      },
+      {
+        "kind": "block",
+        "type": "math_number",
+        "fields": {
+          "NUM": 123
+        }
+      },
+      {
+        "kind": "block",
+        "type": "math_arithmetic"
+      },
+      {
+        "kind": "block",
+        "type": "text"
+      },
+      {
+        "kind" : "block",
+        "type" : "text_print"
+      }
+    ]
+  };
 
-// RESIZE CODE
-/*
-var onresize = function(e) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    var element = blocklyArea;
-    var x = 0;
-    var y = 0;
-    do {
-        x = element.offsetLeft;
-        y = element.offsetTop;
-        element = element.offsetParent;
-    } while (element);
-
-    // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-    Blockly.svgResize(demoWorkspace);
-};
-
-window.addEventListener('resize', onresize, false);
-onresize();
-Blockly.svgResize(demoWorkspace);
-*/
+const demoWorkspace = Blockly.inject('blocklyDiv',
+    {media: 'https://unpkg.com/blockly/media/',
+    zoom: {controls: true,
+    wheel: true,
+    startScale: 1.0,
+    maxScale: 3,
+    minScale: 0.3,
+    scaleSpeed: 1.2
+    },
+    trashcan: true,
+    toolbox: toolbox
+    }
+);
 
 function showCode() {
   // Generate JavaScript code and display it.

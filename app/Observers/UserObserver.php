@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
-use App\Notifications\WelcomeUserEmailNotification;
+//use App\Notifications\WelcomeUserEmailNotification;
 
 class UserObserver
 {
@@ -16,7 +16,6 @@ class UserObserver
     public function created(User $user)
     {
         //$user->notify(new WelcomeUserEmailNotification());
-
     }
 
     /**

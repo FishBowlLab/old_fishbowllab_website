@@ -10460,6 +10460,8 @@ header.masthead .device-container .screen img {
 
 #blocklyDiv {
   position: absolute;
+  height: 400px;
+  width: 100%;
 }
 
 #blocklyArea {

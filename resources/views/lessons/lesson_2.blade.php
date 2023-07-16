@@ -1,17 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.lessonTemplate')
 
 @section("content")
-    @if (Auth::user()->role == "teacher")
-        <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
-    @else
-        <a href="/student" class="btn btn-default">Go Back</a>
-    @endif
     <h1>Blockly Graph</h1>
     <hr>
-    {{--@if(!Auth::guest())--}}
-
     <title>Blockly Demo: Graph</title>
-
 
     <div class="row">
         <h3>Event</h3>
@@ -134,11 +126,8 @@
                 </value>
             </block>
         </xml>
-
-
     </div>
     <script src="https://www.google.com/jsapi"></script>
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
     <script src="{{ asset('js/blocklyGraph.js') }}" defer></script>
-    {{--@endif--}}
 @endsection

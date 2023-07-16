@@ -21,6 +21,11 @@
 
     <!--Load app's scripts-->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!--Load Blockly package-->
+    <script src="{{asset('js/blockly_compressed.js')}}"></script>
+    <script src="{{asset('js/blocks_compressed.js')}}"></script>
+    <script src="{{asset('js/msg/en.js')}}"></script>
 </head>
 <body>
     <div id="app" class="container-flush">
@@ -30,47 +35,22 @@
         -->
         @include("inc.navbar")
         @include("inc.messages")
-        <div class="d-none d-md-block">
-            @if (Auth::user()->role == "teacher")
-                <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
-            @else
-                <a href="/student" class="btn btn-default">Go Back</a>
-            @endif
-        </div>
         @yield("content")
- 
+        <div class="row fixed-bottom">
+            <div class="col-md-4">
+                @if (Auth::user()->role == "teacher")
+                    <a href="{{route("modules.index")}}" class="btn btn-default">Go Back</a>
+                @else
+                    <a href="/student" class="btn btn-default">Go Back</a>
+                @endif
+            </div>
+            <div class="col-md-8">
+                {!! Form::open(['action' => "StudentController@store", 'method'=>'POST', 'class'=>"float-right px-1"]) !!}
+                    {{Form::submit("Submit", ["class" => "btn btn-primary"])}}
+                {!! Form::close()!!}
+            </div>
+        </div>
     </div>
-    
-    <!-- Scripts -->
-    <!--script src="https://unpkg.com/blockly/blockly.min.js"></!--script>-->
-
-    <script>
-        var blocklyArea = document.getElementById('blocklyArea');
-        var blocklyDiv = document.getElementById('blocklyDiv');
-        var demoWorkspace = Blockly.inject(blocklyDiv,
-            {media: 'https://unpkg.com/blockly/media/',
-             toolbox: document.getElementById('toolbox')});
-        var onresize = function(e) {
-          // Compute the absolute coordinates and dimensions of blocklyArea.
-          var element = blocklyArea;
-          var x = 0;
-          var y = 0;
-          do {
-            x += element.offsetLeft;
-            y += element.offsetTop;
-            element = element.offsetParent;
-          } while (element);
-          // Position blocklyDiv over blocklyArea.
-          blocklyDiv.style.left = x + 'px';
-          blocklyDiv.style.top = y + 'px';
-          blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-          blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-          Blockly.svgResize(demoWorkspace);
-        };
-        window.addEventListener('resize', onresize, false);
-        onresize();
-        Blockly.svgResize(demoWorkspace);
-    </script>
 </body>
 
 </html>
